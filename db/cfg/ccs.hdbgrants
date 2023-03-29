@@ -1,0 +1,44 @@
+{
+    "ServiceName_1": {
+        "object_owner": {
+            "schema_privileges": [
+                {
+                    "privileges": [
+                        "INSERT",
+                        "UPDATE"
+                    ],
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                }
+            ],
+            "global_roles": [
+                {
+                    "roles_with_admin_option": [
+                        "REMOTE_SOURCE_ROLE"
+                    ]
+                }
+            ]
+        },
+        "application_user": {
+            "schema_privileges": [
+                {
+                    "privileges": [
+                        "INSERT",
+                        "UPDATE"
+                    ],
+                    "privileges_with_grant_option": [
+                        "SELECT"
+                    ]
+                }
+            ],
+            "global_roles": [
+                {
+                    "roles_with_admin_option": [
+                        "REMOTE_SOURCE_ROLE"
+                    ]
+                }
+            ]
+        }
+    }
+}
