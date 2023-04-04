@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CVC_ROUTES_AND_MATERIALS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="CVC_ROUTES_AND_MATERIALS"/>
+    <localVariables>
+        <variable id="F_GMASITE" parameter="true">
+          <descriptions defaultDescription="F_GMASITE"/>
+          <variableProperties datatype="VARCHAR" length="13" mandatory="false" defaultValue="1" scale="NaN">
+            <valueDomain type="StaticList">
+              <listEntry id="1">
+                <descriptions defaultDescription="LK Meinerzhagen"/>
+              </listEntry>
+              <listEntry id="2">
+                <descriptions defaultDescription="KOI Abbeyfeale"/>
+              </listEntry>
+              <listEntry id="3">
+                <descriptions defaultDescription="KOI Mallow"/>
+              </listEntry>     
+              <listEntry id="4">
+                <descriptions defaultDescription="KOCHI Shanghai"/>
+              </listEntry>    
+              <listEntry id="5">
+                <descriptions defaultDescription="LK Lüdenscheid"/>
+              </listEntry>     
+              <listEntry id="6">
+                <descriptions defaultDescription="KOSPA Sentmenat"/>
+              </listEntry>       
+              <listEntry id="7">
+                <descriptions defaultDescription="KOMAK Ohrid"/>
+              </listEntry> 
+              <listEntry id="8">
+                <descriptions defaultDescription="KOMEX Querétaro"/>
+              </listEntry>           
+              <listEntry id="9">
+                <descriptions defaultDescription="CNCC CHANCHUN "/>
+              </listEntry>
+            </valueDomain>
+            <selection multiLine="false" type="SingleValue"/>
+          </variableProperties>
+        </variable>
+        <variable id="F_CALDAY" parameter="true">
+          <descriptions defaultDescription="F_CALDAY"/>
+          <variableProperties datatype="NVARCHAR" length="13" mandatory="true" scale="NaN" defaultExpressionLanguage="SQL">
+            <valueDomain type="empty"/>
+            <selection multiLine="false" type="SingleValue"/>
+            <defaultExpression>TO_NVARCHAR(CURRENT_DATE,'YYYYMMDD')</defaultExpression>
+          </variableProperties>
+        </variable>
+        <variable id="F_DATA_TEMPERATURE" parameter="true">
+          <descriptions defaultDescription="F_DATA_TEMPERATURE"/>
+          <variableProperties datatype="NVARCHAR" length="1" mandatory="true" defaultValue="9">
+            <valueDomain type="StaticList">
+              <listEntry id="1">
+                <descriptions defaultDescription="Cold"/>
+              </listEntry>
+              <listEntry id="9">
+                <descriptions defaultDescription="Hot"/>
+              </listEntry>
+            </valueDomain>
+            <selection multiLine="false" type="SingleValue"/>
+          </variableProperties>
+        </variable>
+    </localVariables>  
+<variableMappings/>
+<dataSources>
+  <DataSource id="vt_activity_log">
+    <resourceUri>vt_activity_log</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="GMASITE"/>
+      <viewAttribute id="DATE_TIME"/>
+      <viewAttribute id="ROUTER"/>
+      <viewAttribute id="MATERIAL"/>
+    
+      <viewAttribute id="CALDAY"/>
+      <viewAttribute id="DATA_TEMPERATURE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="COUNTER" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>1</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="vt_activity_log"/>
+    <filter>&quot;GMASITE&quot;  = '$$F_GMASITE$$'
+              AND  &quot;CALDAY&quot; &gt;= '$$F_CALDAY$$'
+              AND &quot;DATA_TEMPERATURE&quot; = '$$F_DATA_TEMPERATURE$$'</filter>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="GMASITE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GMASITE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="GMASITE"/>
+    </attribute>
+    <attribute id="DATE_TIME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_TIME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DATE_TIME"/>
+    </attribute>
+    <attribute id="ROUTER" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ROUTER"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ROUTER"/>
+    </attribute>
+    <attribute id="MATERIAL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIAL"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MATERIAL"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="COUNTER" order="5" aggregationType="sum" measureType="simple" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="COUNTER"/>
+      <measureMapping columnObjectName="Projection_1" columnName="COUNTER"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="95" y="218"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

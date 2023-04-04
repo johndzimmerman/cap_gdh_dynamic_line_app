@@ -26,6 +26,18 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 
 ## Database Configuration Notes
 
+CREATE REMOTE SOURCE "RS_PBH"
+
+ADAPTER "hanaodbc"
+
+CONFIGURATION '<?xml version="1.0" encoding="UTF-8"?><ConnectionProperties name="connectionproperties"><PropertyEntry name="adapterversion">1.0</PropertyEntry><PropertyEntry name="connectionmode">adapterproperties</PropertyEntry><PropertyEntry name="driver">libodbcHDB.so</PropertyEntry><PropertyEntry name="server">pbh</PropertyEntry><PropertyEntry name="port">30</PropertyEntry><PropertyEntry name="dml_mode">readwrite</PropertyEntry><PropertyEntry name="extraadapterproperties">use_haas_socks_proxy=true;scc_location_id=CCJDZ</PropertyEntry></ConnectionProperties>'
+
+WITH CREDENTIAL TYPE 'PASSWORD' USING 'user=????????;password=????????';
+
+
+REMOTE_SOURCE_ROLE
+
+
 ## UPS JSON File
 
 {
@@ -42,5 +54,6 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
     "validate_certificate": false,
     "schema": "??????"
 }
+
 
 
